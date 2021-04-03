@@ -5,15 +5,18 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import DetailPage from './details'
 
-// import Link from '../components/Link'
+import Link from '../components/Link'
 
 const Stack = createStackNavigator();
 
 function HomeScreen({ navigation }) {
-  const openJobDetails = () => navigation.navigate("JobDetails");
+  const openJobDetails = () => navigation.navigate("Details");
 
   return (
     <View style={styles.container}>
+      <Link href="details" onPress={openJobDetails}>
+        <Text>Details</Text>
+      </Link>
       <Text style={styles.text}>Welcome to Expo + Next.js 👋</Text>
     </View>
   )
@@ -25,6 +28,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailPage} />
       </Stack.Navigator>
     </NavigationContainer>
   )
