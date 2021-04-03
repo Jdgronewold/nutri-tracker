@@ -1,16 +1,49 @@
 // @generated: @expo/next-adapter@2.1.5
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import DetailPage from './details'
-
 import Link from '../components/Link'
+import fbDatabase from '../components/firebase'
 
 const Stack = createStackNavigator();
 
+const loadUsers = async () => {
+  const userRef = fbDatabase.ref('users')
+  console.log(userRef)
+    
+  try {
+    console.log('trying to fetch');
+    
+    userRef.on('value', (snapshot) => {
+      console.log('loading users');
+    
+      console.log('usersss');
+      
+      console.log(snapshot.val())
+    }, (error) => {
+      console.log(error);
+      
+    })
+    console.log('loadeddddd');
+  } catch {
+    console.log('yooo');
+    
+  }
+  
+  
+}
+
 function HomeScreen({ navigation }) {
   const openJobDetails = () => navigation.navigate("Details");
+  const [users, setUsers] = useState()
+
+  useEffect(() => {
+    console.log('loading user');
+    
+    loadUsers()
+  }, [])
 
   return (
     <View style={styles.container}>
