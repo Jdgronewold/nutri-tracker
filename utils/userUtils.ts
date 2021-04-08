@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import firebase from 'firebase'
 import { User } from '../state/userState'
 
 export const storeUser = async (user: User) => {
@@ -9,7 +10,14 @@ export const storeUser = async (user: User) => {
   }
 }
 
-export const getUser = async (): Promise<User> => {
+export const getUser = async () => {
+  const firebaseUser = firebase.auth().currentUser
+  console.log('from utils: ', firebaseUser);
+  
+  if (!firebaseUser) {
+    return null
+  }
+
   try {
     const user = await AsyncStorage.getItem('user')
     if(user !== null) {

@@ -1,4 +1,5 @@
 import React, { useReducer, useState, useEffect } from 'react'
+import firebase from 'firebase'
 
 import { UserActions, UserActionTypes } from '../actions/userActions'
 import { getUser } from '../utils/userUtils'
@@ -8,7 +9,7 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  uid?: string;
+  uid: string;
 }
 
 export interface TokenData {
@@ -20,6 +21,7 @@ export const defaultUser: User = {
   firstName: '',
   lastName: '',
   email: '',
+  uid: ''
 }
 
 interface UserState {

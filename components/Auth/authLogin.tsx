@@ -5,6 +5,7 @@ import { storeUser } from "../../utils/userUtils";
 import fbDatabase from '../firebase'
 import { User, UserContext } from "../../state/userState";
 import { loginUser } from "../../actions/userActions";
+import LinkComponent from "../Link";
 
 
 const handleNewUser = async (user: firebase.User, firstName: string, lastName: string) => {
@@ -21,7 +22,7 @@ const handleNewUser = async (user: firebase.User, firstName: string, lastName: s
   return newUser
 }
 
-export default () => {
+export default ({ navigation }) => {
   const firstNameRef = useRef(null)
   const lastNameRef = useRef(null)
   const emailRef = useRef(null)
@@ -50,20 +51,10 @@ export default () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> Create an Account </Text>
-      <TextInput
-        ref={firstNameRef}
-        placeholder={"First Name"}
-        style={styles.input}
-      />
-      <TextInput
-        ref={lastNameRef}
-        placeholder={"Last Name"}
-        style={styles.input}
-      />
+      <Text style={styles.title}> Login </Text>
       <TextInput
         ref={emailRef}
-        placeholder={"Username"}
+        placeholder={"Email"}
         style={styles.input}
       />
       <TextInput
@@ -77,6 +68,13 @@ export default () => {
         title={"Create Account"}
         onPress={onPress}
       />
+      <LinkComponent
+        href="/signup"
+        onPress={() => { navigation.navigate("Signup")}}
+      >
+        <Text> Create an Account </Text>
+      </LinkComponent>
+      
     </View>
   );
 };
